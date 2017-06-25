@@ -1,0 +1,6 @@
+#Ignores the class files and IDE specific files
+**/.class
+.idea
+**/target
+*.iml
+**/test
