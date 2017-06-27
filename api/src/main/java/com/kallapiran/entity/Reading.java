@@ -26,7 +26,7 @@ public class Reading {
     private boolean cruiseControlOn;
     private double engineRpm;
 
-    @OneToOne
+    @Embedded
     private Tire tires;
 
 

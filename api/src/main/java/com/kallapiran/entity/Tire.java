@@ -1,31 +1,21 @@
 package com.kallapiran.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
 
-@Entity
+@Embeddable
 public class Tire {
-    @Id
-    @Column(columnDefinition = "VARCHAR(36)")
-    private String id;
+
     private double frontLeft;
     private double frontRight;
     private double rearLeft;
     private double rearRight;
 
-    public Tire(){
-        this.id = UUID.randomUUID().toString();
-    }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+// Getters and Setters
 
     public double getFrontLeft() {
         return frontLeft;
