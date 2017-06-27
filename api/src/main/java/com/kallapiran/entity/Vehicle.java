@@ -3,6 +3,7 @@ package com.kallapiran.entity;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -13,13 +14,18 @@ import javax.persistence.*;
 })
 public class Vehicle {
     @Id
+    @Column(columnDefinition = "VARCHAR(20)")
     private String Vin;
+    @Column(columnDefinition = "VARCHAR(30)")
     private String make;
+    @Column(columnDefinition = "VARCHAR(30)")
     private String model;
-    private String year;
-    private String redlineRpm;
-    private String maxFuelVolume;
+    private int year;
+    private double redlineRpm;
+    private double maxFuelVolume;
+    @Column(columnDefinition = "VARCHAR(24)")
     private String lastServiceDate;
+
 
     public String getVin() {
         return Vin;
@@ -45,27 +51,27 @@ public class Vehicle {
         this.model = model;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public String getRedlineRpm() {
+    public double getRedlineRpm() {
         return redlineRpm;
     }
 
-    public void setRedlineRpm(String redlineRpm) {
+    public void setRedlineRpm(double redlineRpm) {
         this.redlineRpm = redlineRpm;
     }
 
-    public String getMaxFuelVolume() {
+    public double getMaxFuelVolume() {
         return maxFuelVolume;
     }
 
-    public void setMaxFuelVolume(String maxFuelVolume) {
+    public void setMaxFuelVolume(double maxFuelVolume) {
         this.maxFuelVolume = maxFuelVolume;
     }
 
@@ -76,4 +82,5 @@ public class Vehicle {
     public void setLastServiceDate(String lastServiceDate) {
         this.lastServiceDate = lastServiceDate;
     }
+
 }
