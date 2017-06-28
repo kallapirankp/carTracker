@@ -13,11 +13,15 @@ public class ReadingRepositoryImpl implements ReadingRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public void putDetails(Reading reading) {
+    public Reading putDetails(Reading reading) {
         Vehicle v = em.find(Vehicle.class, reading.getVin());
         if(v != null){
             reading.setVehicle(v);
             em.persist(reading);
+            return reading;
+        }else{
+            return null;
         }
     }
+
 }

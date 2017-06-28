@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReadingRepository {
-    void putDetails(Reading reading);
+    Reading putDetails(Reading reading);
 }

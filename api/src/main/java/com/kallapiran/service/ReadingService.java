@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface ReadingService {
+public interface ReadingService{
     Reading putReading(Reading reading);
 }
