@@ -17,12 +17,21 @@ public class AlertRepositoryImpl implements AlertRepository{
 
 
     public void createHighPriorityAlert(Reading reading) {
-        Alert a = new Alert();
-        a.setReading(reading);
-        a.setHigh(true);
-        a.setLow(false);
-        a.setMedium(false);
-        em.persist(a);
+        TypedQuery<Alert> query = em.createNamedQuery("Alert.findAlertByReading", Alert.class);
+        query.setParameter("readValue", reading);
+        List<Alert> returnedResults = query.getResultList();
+        if(returnedResults != null && returnedResults.size() == 1){
+            Alert a = returnedResults.get(0);
+            a.setHigh(true);
+            em.merge(a);
+        }else {
+            Alert a = new Alert();
+            a.setReading(reading);
+            a.setHigh(true);
+            a.setLow(false);
+            a.setMedium(false);
+            em.persist(a);
+        }
     }
 
     public void createMediumPriorityAlert(Reading reading) {
@@ -33,7 +42,7 @@ public class AlertRepositoryImpl implements AlertRepository{
             Alert a = returnedResults.get(0);
             a.setLow(true);
             em.merge(a);
-        }else if(returnedResults.size() == 0){
+        }else {
             Alert a = new Alert();
             a.setReading(reading);
             a.setHigh(false);
@@ -52,7 +61,7 @@ public class AlertRepositoryImpl implements AlertRepository{
             Alert a = returnedResults.get(0);
             a.setMedium(true);
             em.merge(a);
-        }else if(returnedResults.size() == 0){
+        }else {
             Alert a = new Alert();
             a.setReading(reading);
             a.setHigh(false);

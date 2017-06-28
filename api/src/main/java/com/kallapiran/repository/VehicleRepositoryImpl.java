@@ -14,16 +14,17 @@ public class VehicleRepositoryImpl implements VehicleRepository{
     @PersistenceContext
     private EntityManager em;
 
-    public void putDetails(List<Vehicle> vehicles) {
-
-        for(Vehicle v : vehicles){
-            Vehicle vhle = em.find(Vehicle.class, v.getVin());
-            if(vhle == null){
-                em.persist(v);
-            }else{
-                em.merge(v);
-            }
-        }
+    public Vehicle findVehicle(Vehicle vehicle) {
+        return em.find(Vehicle.class, vehicle.getVin());
     }
+
+    public void createVehicle(Vehicle vehicle) {
+        em.persist(vehicle);
+    }
+
+    public void updateVehicle(Vehicle vehicle) {
+        em.merge(vehicle);
+    }
+
 
 }

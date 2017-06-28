@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Alert {
     @Id
     @Column(columnDefinition = "VARCHAR(36)")
-    public String id;
+    private String id;
     private boolean high;
     private boolean low;
     private boolean medium;

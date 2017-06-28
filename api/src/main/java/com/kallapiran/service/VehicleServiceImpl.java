@@ -17,7 +17,14 @@ public class VehicleServiceImpl implements VehicleService{
 
     @Transactional
     public List<Vehicle> putDetails(List<Vehicle> vehicles) {
-        vehicleRepository.putDetails(vehicles);
+        for(Vehicle v : vehicles){
+            Vehicle returnedVehicle = vehicleRepository.findVehicle(v);
+            if(returnedVehicle == null){
+                vehicleRepository.createVehicle(v);
+            }else{
+                vehicleRepository.updateVehicle(returnedVehicle);
+            }
+        }
         return vehicles;
     }
 }

@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface VehicleRepository {
-    void putDetails(List<Vehicle> vehicles);
+    Vehicle findVehicle(Vehicle vehicle);
+    void createVehicle(Vehicle vehicle);
+    void updateVehicle(Vehicle vehicle);
 }

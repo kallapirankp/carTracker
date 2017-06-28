@@ -3,6 +3,7 @@ package com.kallapiran.service;
 import com.kallapiran.entity.Reading;
 import com.kallapiran.entity.Tire;
 import com.kallapiran.entity.Vehicle;
+import com.kallapiran.exception.ResourceNotFoundException;
 import com.kallapiran.repository.AlertRepository;
 import com.kallapiran.repository.ReadingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,18 @@ public class ReadingServiceImpl implements ReadingService{
     AlertRepository alertRepository;
 
 //    constant
-    public static final double percentOfFuel = 0.1;
+    private static final double percentOfFuel = 0.1;
 
     @Transactional
     public Reading putReading(Reading reading) {
         Reading updatedEntity = readingRepository.putDetails(reading);
-        checkForAlerts(updatedEntity);
-        return reading;
+        if(updatedEntity != null){
+            checkForAlerts(updatedEntity);
+            return reading;
+        }else{
+            throw new ResourceNotFoundException("The Vehicle associated with the reading cannot be found");
+        }
+
     }
 
     @Transactional
@@ -58,7 +64,6 @@ public class ReadingServiceImpl implements ReadingService{
         double frontRightTire = tire.getFrontRight();
         double rearLeftTire = tire.getRearLeft();
         double rearRightTire = tire.getRearRight();
-        System.out.println(tire.getFrontLeft());
 
         if(frontLeftTire > 36 || frontLeftTire < 32 || frontRightTire > 36 || frontRightTire < 32 ||
                 rearLeftTire > 36 || rearLeftTire < 32 || rearRightTire >36 || rearRightTire < 32){
