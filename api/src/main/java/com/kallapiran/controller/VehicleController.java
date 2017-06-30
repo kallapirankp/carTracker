@@ -1,5 +1,7 @@
 package com.kallapiran.controller;
 
+import com.kallapiran.entity.Alert;
+import com.kallapiran.entity.AlertCount;
 import com.kallapiran.entity.Vehicle;
 import com.kallapiran.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,4 +21,15 @@ public class VehicleController{
     public List<Vehicle> putDetails(@RequestBody List<Vehicle> vehicles){
         return vehicleService.putDetails(vehicles);
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Vehicle> getAllVehicleDetails(){
+        return vehicleService.getAllVehicleDetails();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/getAlerts")
+    public AlertCount getVehicleWithHighAlerts(){
+        return vehicleService.getVehicleWithHighAlerts();
+    }
+
 }

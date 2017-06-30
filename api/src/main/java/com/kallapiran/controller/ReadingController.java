@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/readings")
 public class ReadingController {
     @Autowired
-    ReadingService readingService;
+    private ReadingService readingService;
 
     @RequestMapping(method = RequestMethod.POST)
     public Reading putReadings(@RequestBody Reading reading){

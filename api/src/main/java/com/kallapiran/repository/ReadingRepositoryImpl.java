@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class ReadingRepositoryImpl implements ReadingRepository {
@@ -17,6 +18,7 @@ public class ReadingRepositoryImpl implements ReadingRepository {
         Vehicle v = em.find(Vehicle.class, reading.getVin());
         if(v != null){
             reading.setVehicle(v);
+            v.reading.add(reading);
             em.persist(reading);
             return reading;
         }else{

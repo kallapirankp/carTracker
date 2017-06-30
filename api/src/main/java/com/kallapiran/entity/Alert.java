@@ -6,7 +6,8 @@ import java.util.UUID;
 @Entity
 @NamedQueries({
         @NamedQuery(name="Alert.findAlertByReading",
-        query = "SELECT a FROM Alert a WHERE a.reading = :readValue")
+        query = "SELECT a FROM Alert a WHERE a.reading = :readValue"),
+
 })
 public class Alert {
     @Id

@@ -1,5 +1,7 @@
 package com.kallapiran.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -29,9 +31,12 @@ public class Reading {
     @Embedded
     private Tire tires;
 
+    @OneToOne(mappedBy = "reading")
+    @JsonIgnore
+    private Alert alert;
 
 
-//    Getter and setter methods
+    //    Getter and setter methods
 
     public Reading(){
 
@@ -151,6 +156,14 @@ public class Reading {
     public void setVehicle(Vehicle vehicle) {
 
         this.vehicle = vehicle;
+    }
+
+    public Alert getAlert() {
+        return alert;
+    }
+
+    public void setAlert(Alert alert) {
+        this.alert = alert;
     }
 
 

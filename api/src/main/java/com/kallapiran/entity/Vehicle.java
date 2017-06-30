@@ -1,8 +1,10 @@
 package com.kallapiran.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,7 +12,11 @@ import java.util.List;
 @Table
 @NamedQueries({
         @NamedQuery(name = "Vehicle.findByVin",
-                    query = "SELECT v FROM Vehicle v WHERE v.Vin=:vin")
+                    query = "SELECT v FROM Vehicle v WHERE v.Vin=:vin"),
+        @NamedQuery(name="Vehicle.findAllVehicles",
+                    query = "SELECT v FROM Vehicle v "),
+        @NamedQuery(name="Vehicle.findVehicleWithHighAlerts",
+                  query = "SELECT v, a FROM Vehicle v JOIN v.reading r JOIN r.alert a WHERE a.high = true")
 })
 public class Vehicle {
     @Id
@@ -25,6 +31,11 @@ public class Vehicle {
     private double maxFuelVolume;
     @Column(columnDefinition = "VARCHAR(24)")
     private String lastServiceDate;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.EAGER)
+    public List<Reading> reading = new ArrayList<Reading>();
+
 
 
     public String getVin() {
@@ -83,4 +94,11 @@ public class Vehicle {
         this.lastServiceDate = lastServiceDate;
     }
 
+    public List<Reading> getReading() {
+        return reading;
+    }
+
+    public void setReading(List<Reading> reading) {
+        this.reading = reading;
+    }
 }
