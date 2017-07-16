@@ -3,6 +3,11 @@ package com.kallapiran.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +24,7 @@ public class Reading {
     private double latitude;
     private double longitude;
     @Column(columnDefinition = "VARCHAR(24)")
-    private String timestamp;
+    private Timestamp timestamp;
     private double fuelVolume;
     private double speed;
     private double engineHp;
@@ -76,12 +81,19 @@ public class Reading {
         this.longitude = longitude;
     }
 
-    public String getTimestamp() {
+
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+        DateFormat d = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        try{
+            Date date = d.parse(timestamp.replaceAll("Z$", "+0000"));
+            this.timestamp = new Timestamp(date.getTime());
+        }catch(ParseException e){
+            System.out.println("Error in parsing" + e);
+        }
     }
 
     public double getFuelVolume() {

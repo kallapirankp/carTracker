@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -36,7 +37,10 @@ public class VehicleRepositoryImpl implements VehicleRepository{
 
     public AlertCount getVehicleWithHighAlerts() {
         AlertCount a = new AlertCount();
+        Timestamp twoHourAgo = new Timestamp(System.currentTimeMillis() - (120 * 60 * 1000));
+        System.out.println("timeTwoHourAgo" + twoHourAgo);
         TypedQuery<Object[]> query = em.createNamedQuery("Vehicle.findVehicleWithHighAlerts", Object[].class);
+        query.setParameter("timeFilter", twoHourAgo);
         for(Object result[] : query.getResultList()){
             Vehicle vehi = (Vehicle) result[0];
             Alert alt = (Alert) result[1];

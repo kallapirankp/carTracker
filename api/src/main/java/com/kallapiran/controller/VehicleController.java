@@ -27,7 +27,7 @@ public class VehicleController{
         return vehicleService.getAllVehicleDetails();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/getAlerts")
+    @RequestMapping(method = RequestMethod.GET, value="/getHighAlerts")
     public AlertCount getVehicleWithHighAlerts(){
         return vehicleService.getVehicleWithHighAlerts();
     }
