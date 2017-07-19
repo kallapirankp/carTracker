@@ -2,6 +2,7 @@ package com.kallapiran.service;
 
 
 import com.kallapiran.entity.AlertCount;
+import com.kallapiran.entity.GeoLocation;
 import com.kallapiran.entity.Reading;
 import com.kallapiran.entity.Vehicle;
 import com.kallapiran.repository.VehicleRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +21,10 @@ public class VehicleServiceImpl implements VehicleService{
     private VehicleRepository vehicleRepository;
 
     @Transactional(readOnly = true)
-    public AlertCount getVehicleWithHighAlerts() {
+    public List<AlertCount> getVehicleWithHighAlerts() {
+        Timestamp twoHourAgo = new Timestamp(System.currentTimeMillis() - (120 * 60 * 1000));
 
-        return vehicleRepository.getVehicleWithHighAlerts();
+        return vehicleRepository.getVehicleWithHighAlerts(twoHourAgo);
     }
 
     @Transactional(readOnly = true)
@@ -41,4 +44,6 @@ public class VehicleServiceImpl implements VehicleService{
         }
         return vehicles;
     }
+
+
 }

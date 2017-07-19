@@ -2,6 +2,7 @@ package com.kallapiran.controller;
 
 import com.kallapiran.entity.Alert;
 import com.kallapiran.entity.AlertCount;
+import com.kallapiran.entity.GeoLocation;
 import com.kallapiran.entity.Vehicle;
 import com.kallapiran.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,10 @@ public class VehicleController{
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/getHighAlerts")
-    public AlertCount getVehicleWithHighAlerts(){
+    public List<AlertCount> getVehicleWithHighAlerts(){
         return vehicleService.getVehicleWithHighAlerts();
     }
+
+
 
 }

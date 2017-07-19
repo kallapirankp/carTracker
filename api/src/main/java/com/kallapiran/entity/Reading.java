@@ -11,6 +11,12 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Reading.getSpecificReadings",
+                    query = "SELECT r FROM Reading r WHERE r.vehicle.Vin = :vinId AND r.timestamp > :time"),
+        @NamedQuery(name="Reading.getVehicleGeoLocation",
+                    query="SELECT NEW com.kallapiran.entity.GeoLocation(r.timestamp, r.latitude, r.longitude) FROM Reading AS r WHERE r.vehicle.Vin = :vinId AND r.timestamp > :time")
+})
 public class Reading {
 
     @Id

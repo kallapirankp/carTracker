@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AlertRepository {
-    void createHighPriorityAlert(Reading reading);
-    void createMediumPriorityAlert(Reading reading);
-    void createLowPriorityAlert(Reading reading);
+    void createHighPriorityAlert(Reading reading, String alertMessage);
+    void createMediumPriorityAlert(Reading reading, String alertMessage);
+    void createLowPriorityAlert(Reading reading, String alertMessage, boolean alertType);
 
 }

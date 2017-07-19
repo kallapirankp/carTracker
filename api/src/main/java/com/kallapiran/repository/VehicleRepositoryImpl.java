@@ -35,23 +35,12 @@ public class VehicleRepositoryImpl implements VehicleRepository{
         return query.getResultList();
     }
 
-    public AlertCount getVehicleWithHighAlerts() {
-        AlertCount a = new AlertCount();
-        Timestamp twoHourAgo = new Timestamp(System.currentTimeMillis() - (120 * 60 * 1000));
-        System.out.println("timeTwoHourAgo" + twoHourAgo);
-        TypedQuery<Object[]> query = em.createNamedQuery("Vehicle.findVehicleWithHighAlerts", Object[].class);
-        query.setParameter("timeFilter", twoHourAgo);
-        for(Object result[] : query.getResultList()){
-            Vehicle vehi = (Vehicle) result[0];
-            Alert alt = (Alert) result[1];
-            if(a.alertCountForEachVehicle.containsKey(vehi.getVin())){
-                a.alertCountForEachVehicle.put(vehi.getVin(), a.alertCountForEachVehicle.get(vehi.getVin())+1 );
-            }else{
-                a.alertCountForEachVehicle.put(vehi.getVin(),1);
-            }
-        }
+    public List<AlertCount> getVehicleWithHighAlerts(Timestamp twoHourAgo) {
 
-        return a;
+        TypedQuery<AlertCount> query = em.createNamedQuery("Vehicle.findVehicleWithHighAlerts", AlertCount.class);
+        query.setParameter("timeFilter", twoHourAgo);
+        List<AlertCount> returnedResult = query.getResultList();
+        return returnedResult;
     }
 
 }

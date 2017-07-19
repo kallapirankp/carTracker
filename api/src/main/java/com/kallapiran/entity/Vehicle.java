@@ -16,7 +16,7 @@ import java.util.List;
         @NamedQuery(name="Vehicle.findAllVehicles",
                     query = "SELECT v FROM Vehicle v "),
         @NamedQuery(name="Vehicle.findVehicleWithHighAlerts",
-                  query = "SELECT v, a FROM Vehicle v JOIN v.reading r JOIN r.alert a WHERE a.high = true AND r.timestamp > :timeFilter")
+                  query = "SELECT NEW com.kallapiran.entity.AlertCount(v, COUNT(a)) FROM Vehicle v JOIN v.reading r JOIN r.alert a WHERE a.high = true AND r.timestamp > :timeFilter GROUP BY v")
 })
 public class Vehicle {
     @Id
