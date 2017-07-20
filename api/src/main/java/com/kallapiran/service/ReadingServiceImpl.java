@@ -70,7 +70,7 @@ public class ReadingServiceImpl implements ReadingService{
         }
     }
 
-    
+
     private void checkForEngineCoolant(Reading readToBeChecked){
         if(readToBeChecked.isEngineCoolantLow() || readToBeChecked.isCheckEngineLightOn()){
 //            alertType is used as a parameter only to indicate the type of low priority alert
