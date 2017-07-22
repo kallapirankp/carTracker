@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://mocker.egen.io", maxAge = 3600)
+@CrossOrigin(maxAge = 3600)
 @RequestMapping(value = "/readings")
 public class ReadingController {
     @Autowired
