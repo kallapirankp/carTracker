@@ -1,0 +1,10 @@
+.vehicle{
+	min-height : calc(100vh - 50px);
+	width : 100vw;
+	border : 1px solid black;
+	text-align: center;
+}
+
+.vehicle-list{
+	min-height: calc(100vh - 80px);
+}

@@ -1,0 +1,21 @@
+.alerts{
+	min-height: calc(100vh - 50px);
+	width: 100vw;
+	border: 1px solid black;
+}
+
+.alert-contents{
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.alert-heading{
+	text-align: center;
+}
+.column{
+	margin-top: 1vh;
+	margin-bottom: auto;
+	min-height: 500px;
+	border: 1px solid grey;
+	text-align: center;
+}

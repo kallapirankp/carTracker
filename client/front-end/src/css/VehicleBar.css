@@ -1,0 +1,13 @@
+.vehicleBar{
+	min-height: 10vh;
+	width: auto;
+	margin-top : 1vh;
+	margin-bottom: 1vh;
+}
+
+.vehicleBar-summary{
+	text-align: center;
+	min-height: 10vh;
+	margin: auto;
+	padding: auto;
+}

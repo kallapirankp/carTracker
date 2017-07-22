@@ -1,0 +1,4 @@
+.show-table{
+	max-height: calc(100vh - 50px);
+	overflow : scroll;
+}
